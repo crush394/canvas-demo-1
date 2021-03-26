@@ -4,7 +4,9 @@
   box-sizing: border-box;
 }
 #canvas {
-  /* 高度和屏幕一样宽 */
+  /* 高度和屏幕一样高 */
   height: 100vh;
+  /* 宽度和屏幕一样宽 */
+  width: 100vw;
   border: 1px solid red;
 }

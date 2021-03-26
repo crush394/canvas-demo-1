@@ -10,25 +10,36 @@
 </head>
 
 <body>
-    <div id="canvas"></div>
+    <!-- <div id="canvas"></div> -->
+    <canvas id="canvas"></canvas>
     <script>
-        canvas.onclick = (e) => {
-            // console.log(e)
-            // console.log调试法
-            console.log(e.clientX)
-            console.log(e.clientY)
-            let div = document.createElement('div')
-            div.style.position = 'absolute'
-            div.style.left = e.clientX + 'px'
-            div.style.top = e.clientY + 'px'
-            div.style.width = '6px'
-            div.style.height = '6px'
-            div.style.marginLeft = '-3px'
-            div.style.marginTop = '-3px'
-            div.style.borderRadius = '50%'
-            div.style.backgroundColor = 'black'
-            canvas.appendChild(div)
+        let canvas = document.getElementById("canvas") // 获取canvas
+        canvas.width = document.documentElement.clientWidth // 获取文档宽给canvas
+        canvas.height = document.documentElement.clientHeight // 获取文档的高给canvas
+        // 画线
+        let ctx = canvas.getContext("2d")
 
+        let painting = false
+
+        ctx.fillStyle = "black"    // 填充颜色
+        ctx.strokeStyle = 'none' // 去掉毛边
+
+        canvas.onmousedown = () => { // 监听鼠标状态 鼠标按下时
+            painting = true
+        }
+
+        canvas.onmousemove = (e) => {
+            if (painting === true) {
+                ctx.beginPath();
+                ctx.arc(e.clientX, e.clientY, 10, 0, 2 * Math.PI)
+                ctx.stroke()
+                ctx.fill() // 让圆变为实心
+            } else {
+                console.log('什么都不做')
+            }
+        }
+        canvas.onmouseup = () => { // 监听鼠标状态 鼠标松开时
+            painting = false
         }
     </script>
 </body>
